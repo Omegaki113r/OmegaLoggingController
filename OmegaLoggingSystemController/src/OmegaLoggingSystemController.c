@@ -1,19 +1,19 @@
 /**
- * @file OmegaLoggingController.c
+ * @file OmegaLoggingSystemController.c
  * @author Omegaki113r
- * @date Saturday, 29th June 2024 1:54:40 am
- * @copyright Copyright <<projectCreationYear>> - 2024 0m3g4ki113r, Xtronic
+ * @date Saturday, 29th June 2024 3:45:31 am
+ * @copyright Copyright 2024 - 2024 0m3g4ki113r, Xtronic
  * */
 /*
- * Project: src
- * File Name: OmegaLoggingController.c
- * File Created: Saturday, 29th June 2024 1:54:40 am
+ * Project: OmegaLoggingSystemController
+ * File Name: OmegaLoggingSystemController.c
+ * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Saturday, 29th June 2024 2:06:37 am
+ * Last Modified: Saturday, 29th June 2024 4:37:27 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Copyright <<projectCreationYear>> - 2024 0m3g4ki113r, Xtronic
+ * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
  * -----
  * HISTORY:
  * Date      	By	Comments

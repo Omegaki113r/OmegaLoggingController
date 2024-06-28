@@ -1,19 +1,19 @@
 /**
- * @file OmegaLoggingController.h
+ * @file OmegaLoggingSystemController.h
  * @author Omegaki113r
- * @date Saturday, 29th June 2024 1:51:16 am
- * @copyright Copyright <<projectCreationYear>> - 2024 0m3g4ki113r, Xtronic
+ * @date Saturday, 29th June 2024 3:45:31 am
+ * @copyright Copyright 2024 - 2024 0m3g4ki113r, Xtronic
  * */
 /*
- * Project: inc
- * File Name: OmegaLoggingController.h
- * File Created: Saturday, 29th June 2024 1:51:16 am
+ * Project: OmegaLoggingSystemController
+ * File Name: OmegaLoggingSystemController.h
+ * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Saturday, 29th June 2024 2:51:25 am
+ * Last Modified: Saturday, 29th June 2024 4:16:28 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Copyright <<projectCreationYear>> - 2024 0m3g4ki113r, Xtronic
+ * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
  * -----
  * HISTORY:
  * Date      	By	Comments
@@ -43,6 +43,8 @@ extern "C"
 #define DEBUG_TEXT_COLOR "38;5;3"
 #define VERBOSE_BACKGROUND_FOREGROUND_COLOR "48;5;15;38;5;0"
 #define VERBOSE_TEXT_COLOR "38;5;15"
+#define PROFILE_BACKGROUND_FOREGROUND_COLOR "48;5;207;38;5;0"
+#define PROFILE_TEXT_COLOR "38;5;207"
 #define END_PARAMETER "m"
 
 #define OMEGA_LOGV(format, ...) printf(START_ESCAPE_LOGGING_PARAMETER DETAILED_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " %s >> %s:%d " END_ESCAPE_LOGGIN_PARAMETER "" START_ESCAPE_LOGGING_PARAMETER VERBOSE_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " [V] " END_ESCAPE_LOGGIN_PARAMETER " " START_ESCAPE_LOGGING_PARAMETER VERBOSE_TEXT_COLOR END_PARAMETER format END_ESCAPE_LOGGIN_PARAMETER "\r\n", __func__, __FILE_NAME__, __LINE__, ##__VA_ARGS__)
@@ -52,7 +54,7 @@ extern "C"
 #define OMEGA_LOGE(format, ...) printf(START_ESCAPE_LOGGING_PARAMETER DETAILED_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " %s >> %s:%d " END_ESCAPE_LOGGIN_PARAMETER "" START_ESCAPE_LOGGING_PARAMETER ERROR_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " [E] " END_ESCAPE_LOGGIN_PARAMETER " " START_ESCAPE_LOGGING_PARAMETER ERROR_TEXT_COLOR END_PARAMETER format END_ESCAPE_LOGGIN_PARAMETER "\r\n", __func__, __FILE_NAME__, __LINE__, ##__VA_ARGS__)
 
 #define PROFILE_START() const uint64_t start_time = esp_timer_get_time()
-#define PROFILE_END(name) OMEGA_LOGD("%s >> %lluus", name, esp_timer_get_time() - start_time)
+#define PROFILE_END(name) printf(START_ESCAPE_LOGGING_PARAMETER DETAILED_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " %s >> %s:%d " END_ESCAPE_LOGGIN_PARAMETER "" START_ESCAPE_LOGGING_PARAMETER PROFILE_BACKGROUND_FOREGROUND_COLOR END_PARAMETER " [P] " END_ESCAPE_LOGGIN_PARAMETER " " START_ESCAPE_LOGGING_PARAMETER PROFILE_TEXT_COLOR END_PARAMETER "%s >> %lluus" END_ESCAPE_LOGGIN_PARAMETER "\r\n", __func__, __FILE_NAME__, __LINE__, name, esp_timer_get_time() - start_time)
 
 #ifdef __cplusplus
 }
