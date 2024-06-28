@@ -1,0 +1,12 @@
+{
+  "sta":{
+    "enabled":1,
+    "auto-reattempt":1,
+    "aps":[
+      {"ssid":"kasun1","password":"kasun1"},
+      {"ssid":"Omegaki113r","password":"Omegaki113r"},
+      {"ssid":"Xtronic","password":"Om3gaki113r"}
+      ]
+    },
+  "ap":{"enabled":1,"ssid":"KMSBoostAP","password":"KMSBoostAPpwd"}
+}
