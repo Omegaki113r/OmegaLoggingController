@@ -1,16 +1,16 @@
 dependencies:
   OmegaFileSystemController:
-    component_hash: 8fd0ac1bf01c81569917af896d2078c6c202376e999e71cf39f8cab84be4ccd9
+    component_hash: 0875393c306da6d1c135cc4f81bf8dc9ad6206efdd666abdaf1f20dc2e5b919e
     source:
       git: https://github.com/Omegaki113r/OmegaFileSystemController.git
       path: .
       type: git
-    version: 56c450a51c405eb900f27284a5effd59462d9b2d
+    version: 9b7712108957527d36906ff7486325a0144a524e
   idf:
     component_hash: null
     source:
       type: idf
     version: 5.3.0
-manifest_hash: 4aef50be683ec748332ee779f9f64ca729907b020963a306bc2bfa5398ce94b1
+manifest_hash: 7ed4ade4ee80ddaf17d4971df8b411eb62603fbf19786ca714d3fabf21a7d54d
 target: esp32s3
 version: 1.0.0
