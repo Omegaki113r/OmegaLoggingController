@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Monday, 1st July 2024 9:18:44 pm
+ * Last Modified: Monday, 1st July 2024 9:39:49 pm
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -31,10 +31,12 @@ extern "C"
 #include <stdarg.h>
 #include <string.h>
 
-#include <cJSON.h>
+#include <esp_heap_caps.h>
 #include <esp_timer.h>
 
 #include <sdkconfig.h>
+
+#include <cJSON.h>
 
 #include "OmegaBaseLoggingController.h"
 #include "OmegaFileSystemController.h"
