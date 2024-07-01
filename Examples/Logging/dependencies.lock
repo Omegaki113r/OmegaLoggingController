@@ -1,11 +1,11 @@
 dependencies:
   OmegaFileSystemController:
-    component_hash: 0875393c306da6d1c135cc4f81bf8dc9ad6206efdd666abdaf1f20dc2e5b919e
+    component_hash: 18ea274d75b9315492ca1bc27a3d6f0f9f57f2eb9e675d551585701560c2eb39
     source:
       git: https://github.com/Omegaki113r/OmegaFileSystemController.git
       path: .
       type: git
-    version: 9b7712108957527d36906ff7486325a0144a524e
+    version: 8dc8e789630331072f390da4b683fe6caea4fc7a
   idf:
     component_hash: null
     source:

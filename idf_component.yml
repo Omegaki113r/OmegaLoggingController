@@ -3,7 +3,7 @@ dependencies:
   ## Required IDF version
   idf:
     version: ">=4.1.0"
+  OmegaBaseLoggingController:
+    git: https://github.com/Omegaki113r/OmegaBaseLoggingController.git
   OmegaFileSystemController:
-    # path: OmegaFileSystemController
     git: https://github.com/Omegaki113r/OmegaFileSystemController.git
-    # override_path: third-party/OmegaFileSystemController

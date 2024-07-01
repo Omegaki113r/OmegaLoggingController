@@ -29,6 +29,9 @@
     "idf.toolsPathWin": "c:\\Users\\om3gaki113r\\.espressif\\tools",
     "idf.flashType": "UART",
     "files.associations": {
-        "task.h": "c"
+        "task.h": "c",
+        "esp_log.h": "c",
+        "*.tcc": "c",
+        "format": "c"
     }
 }
