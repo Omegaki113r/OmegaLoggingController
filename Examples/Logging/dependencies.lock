@@ -1,18 +1,18 @@
 dependencies:
   OmegaBaseLoggingController:
-    component_hash: 2a52c2d551e2e322a3a33a98863bf10d5f4f9813e2ec4f0198de2b59c813a596
+    component_hash: 2649c805057bee307d7e8648bbf699bf9a742d889549aa5838613bf5479fd276
     source:
       git: https://github.com/Omegaki113r/OmegaBaseLoggingController.git
       path: .
       type: git
-    version: 23812f0af7a315c982f2bd171a20e1ca1e9ff28e
+    version: 3c145657c7bacc0e8572e87e3e51b59f4578ff9b
   OmegaFileSystemController:
-    component_hash: 18ea274d75b9315492ca1bc27a3d6f0f9f57f2eb9e675d551585701560c2eb39
+    component_hash: 9da9e723a650c2b075fd8e1befac68c437324554621e527c0bd8c2a1b499b7b0
     source:
       git: https://github.com/Omegaki113r/OmegaFileSystemController.git
       path: .
       type: git
-    version: 8dc8e789630331072f390da4b683fe6caea4fc7a
+    version: 3e261ee73feab78cc8f64c0809c63460a5870f79
   idf:
     component_hash: null
     source:

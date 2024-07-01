@@ -9,4 +9,12 @@
             "2024"
         ]
     ],
+    "files.associations": {
+        "array": "c",
+        "xstring": "c",
+        "xutility": "c",
+        "initializer_list": "c",
+        "list": "c",
+        "type_traits": "c"
+    },
 }

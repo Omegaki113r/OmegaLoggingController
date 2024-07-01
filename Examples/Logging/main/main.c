@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:24:38 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Monday, 1st July 2024 9:19:04 pm
+ * Last Modified: Tuesday, 2nd July 2024 12:41:40 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -28,8 +28,9 @@
 #include <esp_log.h>
 #include <esp_spiffs.h>
 
-#include "OmegaFileSystemController.h"
+#include "OmegaBaseLoggingController.h"
 #include "OmegaLoggingSystemController.h"
+#include "OmegaFileSystemController.h"
 
 void app_main(void)
 {

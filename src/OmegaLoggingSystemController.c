@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Monday, 1st July 2024 9:19:42 pm
+ * Last Modified: Tuesday, 2nd July 2024 2:10:02 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -21,6 +21,7 @@
  */
 #include <esp_spiffs.h>
 
+#include "OmegaBaseLoggingController.h"
 #include "OmegaLoggingSystemController.h"
 
 /*
@@ -53,19 +54,19 @@ void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_na
     }
     const float used_percent = (float)used_size * 100.0f / (float)total_size;
     OMEGA_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
-    // if (used_percent > 10.0f)
-    // {
-    FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eREADING);
-    UNUSED(OmegaFileSystemController_get_file_size(handle));
-    uint64_t line_count = 0;
-    constexpr size_t buf_len = 500;
-    char buf[buf_len];
-    size_t read_size;
-    while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, buf_len)) > 0)
-        ++line_count;
-    OMEGA_LOGE("Line count: %llu %s", line_count, buf);
-    UNUSED(OmegaFileSystemController_close_file(handle));
-    // }
+    if (used_percent > 10.0f)
+    {
+        FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eREADING);
+        UNUSED(OmegaFileSystemController_get_file_size(handle));
+        uint64_t line_count = 0;
+        constexpr size_t buf_len = 500;
+        char buf[buf_len];
+        size_t read_size;
+        while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, buf_len)) > 0)
+            ++line_count;
+        OMEGA_LOGE("Line count: %llu %s", line_count, buf);
+        UNUSED(OmegaFileSystemController_close_file(handle));
+    }
     static uint64_t id = 0;
     uint64_t current_time_us = esp_timer_get_time();
     message_size = snprintf(NULL, 0, PROFILE_FORMAT, id, current_time_us, type, file_name, function_name, line_number, message_buffer);
