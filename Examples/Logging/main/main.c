@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:24:38 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Monday, 1st July 2024 1:01:09 pm
+ * Last Modified: Monday, 1st July 2024 9:19:04 pm
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -49,7 +49,7 @@ void app_main(void)
         size_t read_size = 0;
         while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, sz)) > 0)
         {
-            OMEGA_PLOGI("%s", buf);
+            OMEGA_LOGI("%s", buf);
             vTaskDelay(pdMS_TO_TICKS(100));
         }
         OmegaFileSystemController_close_file(handle);
@@ -59,7 +59,7 @@ void app_main(void)
     for (;;)
     {
         PROFILE_START(__func__);
-        OMEGA_PLOGI("%llu", i++);
+        OMEGA_LOGI("%llu", i++);
         OMEGA_EVENTLOGI("hello world");
         vTaskDelay(pdMS_TO_TICKS(100));
         PROFILE_END(__func__);

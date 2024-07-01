@@ -8,7 +8,7 @@ set( SOURCES src/OmegaLoggingSystemController.c ${TINY_JSON_SOURCES})
 idf_component_register  ( 
                             INCLUDE_DIRS    ${HEADER_DIRECTORIES} 
                             SRCS            ${SOURCES}
-                            REQUIRES        esp_timer OmegaFileSystemController json spiffs OmegaLoggingBaseController
+                            REQUIRES        esp_timer OmegaFileSystemController json spiffs OmegaBaseLoggingController
                         )
 
 set_property(TARGET ${COMPONENT_LIB} PROPERTY C_STANDARD 23)
