@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Tuesday, 2nd July 2024 1:40:25 pm
+ * Last Modified: Tuesday, 2nd July 2024 11:47:07 pm
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -23,6 +23,7 @@
 
 #include <cJSON.h>
 
+#include "OmegaFileSystemController.h"
 #include "OmegaLoggingSystemController.h"
 #include "OmegaUtilityDriver.h"
 

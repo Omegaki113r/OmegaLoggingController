@@ -15,6 +15,7 @@
         "xutility": "c",
         "initializer_list": "c",
         "list": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "omegaloggingsystemcontroller.h": "c"
     },
 }
