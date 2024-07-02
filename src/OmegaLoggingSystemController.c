@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Tuesday, 2nd July 2024 2:10:02 am
+ * Last Modified: Tuesday, 2nd July 2024 2:11:55 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -80,7 +80,7 @@ void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_na
     OMEGA_LOGD("%s", logging_buffer);
     size_t written_length;
     message_size = strlen(logging_buffer);
-    handle = OmegaFileSystemController_open_file("/storage/log.txt", eWRITING | eAPPEND);
+    FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eWRITING | eAPPEND);
     if ((written_length = OmegaFileSystemController_write_file(handle, (uint8_t *)logging_buffer, message_size)) != message_size)
         OMEGA_LOGW("Expected to write: %u, Actually written: %u", strlen(logging_buffer), written_length);
     UNUSED(OmegaFileSystemController_close_file(handle));
