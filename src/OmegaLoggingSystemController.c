@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Tuesday, 2nd July 2024 2:11:55 am
+ * Last Modified: Tuesday, 2nd July 2024 1:28:02 pm
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -23,6 +23,7 @@
 
 #include "OmegaBaseLoggingController.h"
 #include "OmegaLoggingSystemController.h"
+#include "OmegaUtilityDriver.h"
 
 /*
     {"id":xxxx, "time":xxxxxx, "status": 0, "file":"ssss", "func":"ssss", "line":xxx, "message":"ssss"}\r\n
