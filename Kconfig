@@ -1,0 +1,42 @@
+menu "OmegaLoggingSystemController Configuration"
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_DATA
+        bool "Enable Data logging"
+        default "y"
+        help
+            This is used to enable or disable the data logging to a SPIFFS file using OMEGA_DATALOG
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_EVENT
+        bool "Enable Event logging"
+        default "n"
+        help
+            This is used to enable or disable the event logging to a SPIFFS file using OMEGA_EVENTLOGx
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_VERBOSE
+        bool "Enable Logging System Controller Verbose logs"
+        default "n"
+        help
+            This is used to enable or disable verbose logs
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_DEBUG
+        bool "Enable Logging System Controller Debug logs"
+        default "n"
+        help
+            This is used to enable or disable debug logs
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_INFO
+        bool "Enable Logging System Controller Info logs"
+        default "n"
+        help
+            This is used to enable or disable info logs
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_WARN
+        bool "Enable Logging System Controller Warn logs"
+        default "n"
+        help
+            This is used to enable or disable warn logs
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_ERROR
+        bool "Enable Logging System Controller Error logs"
+        default "n"
+        help
+            This is used to enable or disable error logs
+    config OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE
+        bool "Enable Logging System Controller Profiling"
+        default "n"
+        help
+            This is used to enable or disable profiling
+endmenu

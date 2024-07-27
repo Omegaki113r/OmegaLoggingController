@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:24:38 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Tuesday, 2nd July 2024 12:41:40 am
+ * Last Modified: Saturday, 27th July 2024 7:33:43 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -29,8 +29,8 @@
 #include <esp_spiffs.h>
 
 #include "OmegaBaseLoggingController.h"
-#include "OmegaLoggingSystemController.h"
 #include "OmegaFileSystemController.h"
+#include "OmegaLoggingSystemController.h"
 
 void app_main(void)
 {
@@ -41,28 +41,14 @@ void app_main(void)
         .format_if_mount_failed = false,
     };
     ESP_ERROR_CHECK(esp_vfs_spiffs_register(&spiffs_config));
-    {
-        FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eREADING);
-        const size_t sz = OmegaFileSystemController_get_file_size(handle);
-        char *buf = malloc(sz + 1);
-        if (buf == NULL)
-            return;
-        size_t read_size = 0;
-        while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, sz)) > 0)
-        {
-            OMEGA_LOGI("%s", buf);
-            vTaskDelay(pdMS_TO_TICKS(100));
-        }
-        OmegaFileSystemController_close_file(handle);
-        free(buf);
-    }
     uint64_t i = 0;
     for (;;)
     {
-        PROFILE_START(__func__);
-        OMEGA_LOGI("%llu", i++);
-        OMEGA_EVENTLOGI("hello world");
+        // OMEGA_LOGI("%llu", i++);
+        PROFILE_START(event_logging);
+        OMEGA_DATALOGF("%s\r\n", "hello");
+        OMEGA_DATALOG("world\r\n", strlen("world\r\n"));
+        PROFILE_END();
         vTaskDelay(pdMS_TO_TICKS(100));
-        PROFILE_END(__func__);
     }
 }

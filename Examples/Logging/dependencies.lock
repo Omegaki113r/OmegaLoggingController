@@ -1,25 +1,32 @@
 dependencies:
   OmegaBaseLoggingController:
-    component_hash: e81e5fc2c0be3cd4a39db0e4f469a7a747776c526bae3ea204fe9cf6781412b5
+    component_hash: 6ea842f9c1e3be922cecbad26164014901a18740657c132b564632fc703c12de
     source:
       git: https://github.com/Omegaki113r/OmegaBaseLoggingController.git
       path: .
       type: git
-    version: c43f3748f827847d42e7972070f8d5842a004c76
+    version: 374e680475d3c372d0c956d8fe1a3793c69c0c23
   OmegaFileSystemController:
-    component_hash: 9da9e723a650c2b075fd8e1befac68c437324554621e527c0bd8c2a1b499b7b0
+    component_hash: fd45e0795d3f1b6156defd06b904c33199b0a801d5196d80cbacbecd2ec9672c
     source:
       git: https://github.com/Omegaki113r/OmegaFileSystemController.git
       path: .
       type: git
-    version: 3e261ee73feab78cc8f64c0809c63460a5870f79
+    version: 729d5bdf2196fba18cc210596921f5c5430e9503
+  OmegaHandleGenerator:
+    component_hash: 752160adc362ce40c6095555ef6627c6a41e13517db1cf61ed144068c434416a
+    source:
+      git: https://github.com/Omegaki113r/OmegaHandleGenerator.git
+      path: .
+      type: git
+    version: 35c6ed2140a30ca0cf6ac3af5eb3b9f51383629d
   OmegaUtilityDriver:
-    component_hash: 607d2e46f3205d271011abdc9b536e65f69c2843c60bae4484d5b24d7f2b8bfb
+    component_hash: 3ca066818257e48fd8dc94075db3d22aaf2a08c1da592c92a95edcfd8dbbf768
     source:
       git: https://github.com/Omegaki113r/OmegaUtilityDriver.git
       path: .
       type: git
-    version: 126d09fb7901483c63e719ec8a047d10b870ebdd
+    version: 50b37c933cbe3a591dca96b71f30db328f6455e3
   idf:
     component_hash: null
     source:
