@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Saturday, 27th July 2024 7:16:52 am
+ * Last Modified: Sunday, 4th August 2024 12:13:17 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -38,7 +38,10 @@ extern "C"
         eWARN,
         eERROR,
     } EventTypes;
-#if OMEGA_LOGGING_SYSTEM_CONTROLLER_EVENT
+
+#include <sdkconfig.h>
+
+#if CONFIG_OMEGA_LOGGING_SYSTEM_CONTROLLER_EVENT
     void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_name, const char *function_name, const size_t line_number, const char *format, ...);
 #define OMEGA_EVENTLOGD(format, ...) OmegaLoggingSystemController_log_event(eDEBUG, __FILE_NAME__, __func__, __LINE__, format, ##__VA_ARGS__)
 #define OMEGA_EVENTLOGI(format, ...) OmegaLoggingSystemController_log_event(eINFO, __FILE_NAME__, __func__, __LINE__, format, ##__VA_ARGS__)
@@ -51,14 +54,20 @@ extern "C"
 #define OMEGA_EVENTLOGE(format, ...)
 #endif
 
-#if OMEGA_LOGGING_SYSTEM_CONTROLLER_DATA
+#if CONFIG_OMEGA_LOGGING_SYSTEM_CONTROLLER_DATA
     void OmegaLoggingSystemController_logf_data(const char *, ...);
     void OmegaLoggingSystemController_log_data(const char *, size_t);
+    void OmegaLoggingSystemController_pause_log_data();
+    void OmegaLoggingSystemController_resume_log_data();
 #define OMEGA_DATALOGF(format, ...) OmegaLoggingSystemController_logf_data(format, ##__VA_ARGS__)
 #define OMEGA_DATALOG(data, data_len) OmegaLoggingSystemController_log_data(data, data_len)
+#define OMEGA_PAUSE_DATALOG() OmegaLoggingSystemController_pause_log_data()
+#define OMEGA_RESUME_DATALOG() OmegaLoggingSystemController_resume_log_data()
 #else
 #define OMEGA_DATALOGF(format, ...)
 #define OMEGA_DATALOG(data, len)
+#define OMEGA_PAUSE_DATALOG()
+#define OMEGA_RESUME_DATALOG()
 #endif
 
 #ifdef __cplusplus

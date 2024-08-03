@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Saturday, 27th July 2024 7:16:56 am
+ * Last Modified: Sunday, 4th August 2024 12:22:10 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -22,6 +22,9 @@
 #include <esp_spiffs.h>
 #include <stdarg.h>
 #include <string.h>
+
+#include <freertos/FreeRTOS.h>
+#include <freertos/semphr.h>
 
 #include <cJSON.h>
 
@@ -88,6 +91,20 @@
 #define EVENT_LOG_FORMAT "{\"id\":%llu,\"time\":%llu,\"status\":%u,\"file\":\"%s\",\"func\":\"%s\",\"line\":%u,\"message\":\"%s\"}\r\n"
 #define DATA_LOG_FORMAT "%s\r\n"
 
+static SemaphoreHandle_t s_data_logging_semaphore_handle;
+static inline bool create_semaphore()
+{
+    if (s_data_logging_semaphore_handle == NULL)
+    {
+        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
+        if (s_data_logging_semaphore_handle == NULL)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
+            return;
+        }
+    }
+}
+
 void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_name, const char *function_name, const size_t line_number, const char *format, ...)
 {
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_START(log_event);
@@ -151,6 +168,17 @@ ret:
 void OmegaLoggingSystemController_logf_data(const char *format, ...)
 {
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_START(logf_data);
+    if (s_data_logging_semaphore_handle == NULL)
+    {
+        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
+        if (s_data_logging_semaphore_handle == NULL)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
+            return;
+        }
+    }
+    if (xSemaphoreTake(s_data_logging_semaphore_handle, pdMS_TO_TICKS(50)))
+        return;
     va_list args;
     va_start(args, format);
     size_t message_size = snprintf(NULL, 0, format, args);
@@ -192,12 +220,24 @@ void OmegaLoggingSystemController_logf_data(const char *format, ...)
 clean_message_buffer:
     omega_free(message_buffer);
 ret:
+    UNUSED(xSemaphoreGive(s_data_logging_semaphore_handle));
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_END();
 }
 
 void OmegaLoggingSystemController_log_data(const char *data, const size_t data_length)
 {
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_START(log_data);
+    if (s_data_logging_semaphore_handle == NULL)
+    {
+        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
+        if (s_data_logging_semaphore_handle == NULL)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
+            return;
+        }
+    }
+    if (xSemaphoreTake(s_data_logging_semaphore_handle, pdMS_TO_TICKS(50)))
+        return;
     size_t total_size, used_size;
     esp_err_t err = esp_spiffs_info(NULL, &total_size, &used_size);
     if (err != ESP_OK)
@@ -226,5 +266,27 @@ void OmegaLoggingSystemController_log_data(const char *data, const size_t data_l
     OmegaFileSystemController_write_file(handle, (uint8_t *)data, data_length);
     UNUSED(OmegaFileSystemController_close_file(handle));
 ret:
+    UNUSED(xSemaphoreGive(s_data_logging_semaphore_handle));
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_END();
+}
+
+void OmegaLoggingSystemController_pause_log_data()
+{
+    if (s_data_logging_semaphore_handle == NULL)
+    {
+        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
+        if (s_data_logging_semaphore_handle == NULL)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
+            return;
+        }
+    }
+    UNUSED(xSemaphoreTake(s_data_logging_semaphore_handle, portMAX_DELAY));
+}
+
+void OmegaLoggingSystemController_resume_log_data()
+{
+    if (s_data_logging_semaphore_handle == NULL)
+        return;
+    UNUSED(xSemaphoreGive(s_data_logging_semaphore_handle));
 }
