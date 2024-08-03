@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Sunday, 4th August 2024 12:22:10 am
+ * Last Modified: Sunday, 4th August 2024 1:01:24 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -100,9 +100,10 @@ static inline bool create_semaphore()
         if (s_data_logging_semaphore_handle == NULL)
         {
             OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
-            return;
+            return false;
         }
     }
+    return true;
 }
 
 void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_name, const char *function_name, const size_t line_number, const char *format, ...)
@@ -201,17 +202,11 @@ void OmegaLoggingSystemController_logf_data(const char *format, ...)
     OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
     if (used_percent > 90.0f)
     {
-        // FileHandle handle = OmegaFileSystemController_open_file("/storage/log_data.txt", eREADING);
-        // UNUSED(OmegaFileSystemController_get_file_size(handle));
-        // uint64_t line_count = 0;
-        // constexpr size_t buf_len = 500;
-        // char buf[buf_len];
-        // size_t read_size;
-        // while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, buf_len)) > 0)
-        //     ++line_count;
-        // OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("Line count: %llu %s", line_count, buf);
-        // UNUSED(OmegaFileSystemController_close_file(handle));
-        goto clean_message_buffer;
+        if (OmegaFileSystemController_delete_file("/storage/log.txt") != eFSC_SUCCESS)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("Deleting Log file failed");
+            goto clean_message_buffer;
+        }
     }
     FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eAPPEND);
     size_t written_length = 0;
@@ -249,17 +244,11 @@ void OmegaLoggingSystemController_log_data(const char *data, const size_t data_l
     OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
     if (used_percent > 90.0f)
     {
-        // FileHandle handle = OmegaFileSystemController_open_file("/storage/log_data.txt", eREADING);
-        // UNUSED(OmegaFileSystemController_get_file_size(handle));
-        // uint64_t line_count = 0;
-        // constexpr size_t buf_len = 500;
-        // char buf[buf_len];
-        // size_t read_size;
-        // while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, buf_len)) > 0)
-        //     ++line_count;
-        // OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("Line count: %llu %s", line_count, buf);
-        // UNUSED(OmegaFileSystemController_close_file(handle));
-        goto ret;
+        if (OmegaFileSystemController_delete_file("/storage/log.txt") != eFSC_SUCCESS)
+        {
+            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("Deleting Log file failed");
+            goto ret;
+        }
     }
     FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eAPPEND);
     size_t written_length = 0;
