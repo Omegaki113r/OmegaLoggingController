@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Sunday, 4th August 2024 12:13:17 am
+ * Last Modified: Monday, 5th August 2024 11:16:02 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -57,17 +57,11 @@ extern "C"
 #if CONFIG_OMEGA_LOGGING_SYSTEM_CONTROLLER_DATA
     void OmegaLoggingSystemController_logf_data(const char *, ...);
     void OmegaLoggingSystemController_log_data(const char *, size_t);
-    void OmegaLoggingSystemController_pause_log_data();
-    void OmegaLoggingSystemController_resume_log_data();
 #define OMEGA_DATALOGF(format, ...) OmegaLoggingSystemController_logf_data(format, ##__VA_ARGS__)
 #define OMEGA_DATALOG(data, data_len) OmegaLoggingSystemController_log_data(data, data_len)
-#define OMEGA_PAUSE_DATALOG() OmegaLoggingSystemController_pause_log_data()
-#define OMEGA_RESUME_DATALOG() OmegaLoggingSystemController_resume_log_data()
 #else
 #define OMEGA_DATALOGF(format, ...)
 #define OMEGA_DATALOG(data, len)
-#define OMEGA_PAUSE_DATALOG()
-#define OMEGA_RESUME_DATALOG()
 #endif
 
 #ifdef __cplusplus

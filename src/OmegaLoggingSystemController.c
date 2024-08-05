@@ -10,7 +10,7 @@
  * File Created: Saturday, 29th June 2024 3:45:31 am
  * Author: Omegaki113r (omegaki113r@gmail.com)
  * -----
- * Last Modified: Sunday, 4th August 2024 1:01:24 am
+ * Last Modified: Monday, 5th August 2024 11:16:59 am
  * Modified By: Omegaki113r (omegaki113r@gmail.com)
  * -----
  * Copyright 2024 - 2024 0m3g4ki113r, Xtronic
@@ -91,21 +91,6 @@
 #define EVENT_LOG_FORMAT "{\"id\":%llu,\"time\":%llu,\"status\":%u,\"file\":\"%s\",\"func\":\"%s\",\"line\":%u,\"message\":\"%s\"}\r\n"
 #define DATA_LOG_FORMAT "%s\r\n"
 
-static SemaphoreHandle_t s_data_logging_semaphore_handle;
-static inline bool create_semaphore()
-{
-    if (s_data_logging_semaphore_handle == NULL)
-    {
-        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
-        if (s_data_logging_semaphore_handle == NULL)
-        {
-            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
-            return false;
-        }
-    }
-    return true;
-}
-
 void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_name, const char *function_name, const size_t line_number, const char *format, ...)
 {
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_START(log_event);
@@ -129,18 +114,8 @@ void OmegaLoggingSystemController_log_event(EventTypes type, const char *file_na
     }
     const float used_percent = (float)used_size * 100.0f / (float)total_size;
     OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
-    if (used_percent > 90.0f)
+    if (used_percent > 65.0f)
     {
-        // FileHandle handle = OmegaFileSystemController_open_file("/storage/log.txt", eREADING);
-        // UNUSED(OmegaFileSystemController_get_file_size(handle));
-        // uint64_t line_count = 0;
-        // constexpr size_t buf_len = 500;
-        // char buf[buf_len];
-        // size_t read_size;
-        // while ((read_size = OmegaFileSystemController_read_file(handle, eREAD_LINE, (uint8_t *)buf, buf_len)) > 0)
-        //     ++line_count;
-        // OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("Line count: %llu %s", line_count, buf);
-        // UNUSED(OmegaFileSystemController_close_file(handle));
         goto clean_message_buffer;
     }
     static uint64_t id = 0;
@@ -200,7 +175,7 @@ void OmegaLoggingSystemController_logf_data(const char *format, ...)
     }
     const float used_percent = (float)used_size * 100.0f / (float)total_size;
     OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
-    if (used_percent > 90.0f)
+    if (used_percent > 65.0f)
     {
         if (OmegaFileSystemController_delete_file("/storage/log.txt") != eFSC_SUCCESS)
         {
@@ -242,7 +217,7 @@ void OmegaLoggingSystemController_log_data(const char *data, const size_t data_l
     }
     const float used_percent = (float)used_size * 100.0f / (float)total_size;
     OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGD("spiffs info:(%.2f%%) %d/%d", used_percent, used_size, total_size);
-    if (used_percent > 90.0f)
+    if (used_percent > 65.0f)
     {
         if (OmegaFileSystemController_delete_file("/storage/log.txt") != eFSC_SUCCESS)
         {
@@ -257,25 +232,4 @@ void OmegaLoggingSystemController_log_data(const char *data, const size_t data_l
 ret:
     UNUSED(xSemaphoreGive(s_data_logging_semaphore_handle));
     OMEGA_LOGGING_SYSTEM_CONTROLLER_PROFILE_END();
-}
-
-void OmegaLoggingSystemController_pause_log_data()
-{
-    if (s_data_logging_semaphore_handle == NULL)
-    {
-        s_data_logging_semaphore_handle = xSemaphoreCreateMutex();
-        if (s_data_logging_semaphore_handle == NULL)
-        {
-            OMEGA_LOGGING_SYSTEM_CONTROLLER_LOGE("s_data_logging_semaphore_handle xSemaphoreCreateMutex");
-            return;
-        }
-    }
-    UNUSED(xSemaphoreTake(s_data_logging_semaphore_handle, portMAX_DELAY));
-}
-
-void OmegaLoggingSystemController_resume_log_data()
-{
-    if (s_data_logging_semaphore_handle == NULL)
-        return;
-    UNUSED(xSemaphoreGive(s_data_logging_semaphore_handle));
 }
